@@ -20,8 +20,9 @@ Further information can be found here: https://github.com/react-native-community
 - eslint airbnb (with config)
 - husky
 - jest
-- axios
+- axios (with requests and refresh)
 - appcenter (need config)
+- add theme
 
 ## Installation and run
 
