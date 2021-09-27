@@ -6,7 +6,7 @@ import './src/i18n';
 export default function Main() {
   Text.defaultProps = Text.defaultProps || {};
   Text.defaultProps.allowFontScaling = false;
-  console.log('123');
+
   return (
     <Suspense fallback={<View />}>
       <AppNavigator />

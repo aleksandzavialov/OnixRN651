@@ -12,17 +12,24 @@ Further information can be found here: https://github.com/react-native-community
 ## Features
 
 - react-navigation
+- prop-types
 - i18next
-- react-native-bootsplash
+- @react-native-async-storage/async-storage
 - react-redux
 - redux-thunk
-- eslint airbnb
+- eslint airbnb (with config)
 - husky
 - jest
+- axios
+- appcenter (need config)
 
 ## Installation and run
 
 Read [Setting up the development environment](https://nodejs.org/) for your OS.
+
+```sh
+npm i
+```
 
 **For run android**
 
