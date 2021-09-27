@@ -1,32 +1,58 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, StatusBar } from 'react-native';
+import {
+  View, StyleSheet, StatusBar, ScrollView
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@react-navigation/native';
 
 const Layout = ({
-  children, style, bottomSafeArea, topSafeArea,
+  children,
+  style,
+  bottomSafeArea,
+  topSafeArea,
+  withScroll,
+  scrollStyle,
+  styleContainer,
+  keyboardShouldPersistTaps,
 }) => {
-  const { colors: { mainColor } } = useTheme();
+  const { colors: { whiteColor } } = useTheme();
   const { bottom, top } = useSafeAreaInsets();
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: mainColor,
+      backgroundColor: whiteColor,
       ...(bottomSafeArea && { paddingBottom: bottom }),
-      ...(topSafeArea && { paddingTop: top })
+      ...(topSafeArea && { paddingTop: top }),
     },
     viewContainer: {
-      flex: 1
+      flexGrow: 1,
+    },
+    scrollStyle: {
+      flexGrow: 1,
     },
   });
 
   return (
     <View style={[styles.container, style]}>
-      <StatusBar barStyle="dark-content" />
-      <View style={styles.viewContainer}>
-        {children}
-      </View>
+      <StatusBar barStyle="dark-content" translucent backgroundColor="transparent" />
+      {
+        withScroll ? (
+          <ScrollView
+            style={[styles.scrollStyle, scrollStyle]}
+            contentContainerStyle={[styles.viewContainer, styleContainer]}
+            keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+            bounces={false}
+          >
+            {children}
+          </ScrollView>
+        ) : (
+          <View style={[styles.viewContainer, styleContainer]}>
+            {children}
+          </View>
+        )
+      }
     </View>
   );
 };
@@ -36,13 +62,20 @@ Layout.propTypes = {
   style: PropTypes.shape({}),
   bottomSafeArea: PropTypes.bool,
   topSafeArea: PropTypes.bool,
-
+  withScroll: PropTypes.bool,
+  keyboardShouldPersistTaps: PropTypes.string,
+  scrollStyle: PropTypes.shape({}),
+  styleContainer: PropTypes.shape({}),
 };
 
 Layout.defaultProps = {
   style: {},
   bottomSafeArea: false,
   topSafeArea: false,
+  withScroll: false,
+  styleContainer: {},
+  scrollStyle: {},
+  keyboardShouldPersistTaps: 'handled',
 };
 
 export default Layout;
