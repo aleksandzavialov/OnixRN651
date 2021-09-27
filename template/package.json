@@ -1,7 +1,6 @@
 {
   "name": "onixreactnative",
   "version": "0.0.1",
-  "license": "UNLICENSED",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -57,8 +56,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "node_modules/.bin/eslint . --max-warnings=0",
-      "pre-push": "node_modules/.bin/eslint . --max-warnings=0"
+      "pre-commit": "npx eslint . --max-warnings=0",
+      "pre-push": "npx eslint . --max-warnings=0"
     }
   }
 }
