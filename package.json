@@ -1,0 +1,24 @@
+{
+  "name": "react-native-onix",
+  "version": "0.0.1",
+  "description": "Onix react native template",
+  "files": [
+    "template",
+    "template.config.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aleksandzavialov/RNOnix.git"
+  },
+  "keywords": [
+    "react-native",
+    "jest",
+    "template",
+    "boilerplate"
+  ],
+  "author": "Alexandr Zavialov <avelhar74@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/aleksandzavialov/RNOnix/issues"
+  },
+  "homepage": "https://github.com/aleksandzavialov/RNOnix"
+}
