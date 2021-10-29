@@ -1,26 +1,23 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import HomeScreen from '../screens/Home/Home';
 import SignInScreen from '../screens/SignIn/SignIn';
-import { setUserInitialData } from '../store/auth/actions';
 import NavigationService from '../utils/navigationService';
 import theme from '../theme';
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
-  const dispatch = useDispatch();
+  const { token } = useSelector(({ auth: { accessToken } }) => ({ token: accessToken }), shallowEqual);
   const styles = StyleSheet.create({
     safeArea: {
       flex: 1,
     },
   });
-
   const linking = {
     prefixes: [''],
     config: {
@@ -30,20 +27,7 @@ const AppNavigator = () => {
       },
     },
     async getInitialURL() {
-      let initial = '';
-      const loginLinkUrl = await AsyncStorage.multiGet(['accessToken', 'refreshToken', 'user'])
-        .then(([accessToken, refreshToken, user]) => {
-          let initialLink = '';
-          if (accessToken?.[1] && refreshToken?.[1] && user?.[1]) {
-            dispatch(setUserInitialData(accessToken[1], refreshToken[1], JSON.parse(user[1])));
-            initialLink = 'Home';
-          }
-          return initialLink;
-        });
-      if (loginLinkUrl) {
-        initial = loginLinkUrl;
-      }
-      return initial;
+      return token ? 'Home' : 'SignIn';
     },
   };
 
