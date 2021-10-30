@@ -54,6 +54,11 @@ npx react-native run-ios
 npm run clear
 ```
 
+**For use husky run once**
+```sh
+npm run prepare
+```
+
 ## Issues
 
 **./gradlew EACCES error when running**
